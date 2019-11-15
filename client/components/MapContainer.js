@@ -1,18 +1,29 @@
 import React, {Component} from 'react'
-import {Map, GoogleApiWrapper, Marker} from 'google-maps-react'
+import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 import * as artData from '/Users/id/Desktop/stackathon/client/data/jersey-city-mural-map-list.json'
+const key = process.env.REACT_APP_GOOGLE_KEY
+const data = [artData]
 
 export class MapContainer extends Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
 
-    this.state = {
-      spots: [artData]
-    }
-  }
+  //   this.state = {
+  //     selectedArt: useState(null)
+  //   }
+  // }
+
+  // returns an error suggesting to define state property
+  // getInitialState() {
+  //   return {
+  //     showingInfoWindow: false,
+  //     activeMarker: {},
+  //     selectedPlace: {}
+  //   }
+  // }
 
   displayMarkers = () => {
-    const mapSpots = this.state.spots[0].default
+    const mapSpots = data[0].default
     console.log(mapSpots[0].fields)
     return mapSpots.map((spot, index) => {
       return (
@@ -23,7 +34,9 @@ export class MapContainer extends Component {
             lat: spot.fields.latitude,
             lng: spot.fields.longitude
           }}
-          onClick={() => console.log('You clicked me!')}
+          onClick={() => {
+            // setSelectedArt(spot)
+          }}
         />
       )
     })
@@ -47,6 +60,9 @@ export class MapContainer extends Component {
   }
 }
 
-export default GoogleApiWrapper({
+const googleWrapper = GoogleApiWrapper({
   apiKey: 'AIzaSyA4BBHjmNNTbfJWTLeDqBBGAJ0ITQxU_Ko'
+  // apiKey: key
 })(MapContainer)
+
+export default googleWrapper
