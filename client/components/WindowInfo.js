@@ -1,7 +1,6 @@
 import React from 'react'
 
 const WindowInfo = props => {
-  // console.log(props.props.activeMarker.spot.fields)
   const {
     artist,
     name,
@@ -15,6 +14,7 @@ const WindowInfo = props => {
         {instagram}
       </a>
       <h5>{`Found at ${location_with_city}`}</h5>
+      <iframe src={instagram} />
     </div>
   )
 }

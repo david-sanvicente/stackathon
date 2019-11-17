@@ -56,7 +56,6 @@ export class MapContainer extends Component {
       width: '100%',
       height: '100%'
     }
-    // console.log(this.props)
     return (
       <Map
         google={this.props.google}

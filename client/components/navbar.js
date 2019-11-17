@@ -6,7 +6,13 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>Stackathon</h1>
+    <h1>JC StreetArt</h1>
+    <h5>
+      Thumbnails for the works don't presently display, not because the code
+      isn't working but because Instagram now blocks iframe requests. <br /> The
+      links to the artists pages, however, will direct you to their pages.
+      Please take a moment to enjoy some of their amazing work!{' '}
+    </h5>
     <nav>
       {isLoggedIn ? (
         <div>
