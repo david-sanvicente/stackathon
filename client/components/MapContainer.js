@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 import * as artData from '/Users/id/Desktop/stackathon/client/data/jersey-city-mural-map-list.json'
-const key = process.env.REACT_APP_GOOGLE_KEY
+import WindowInfo from './WindowInfo'
+// const key = process.env.REACT_APP_GOOGLE_KEY
 const data = [artData]
 
 export class MapContainer extends Component {
@@ -36,6 +37,7 @@ export class MapContainer extends Component {
     return mapSpots.map((spot, index) => {
       return (
         <Marker
+          spot={spot}
           key={index}
           id={index}
           position={{
@@ -43,7 +45,7 @@ export class MapContainer extends Component {
             lng: spot.fields.longitude
           }}
           onClick={this.onMarkerClick}
-          name="Kenyatta International Convention Centre"
+          // name={`${spot.fields.artist}`}
         />
       )
     })
@@ -54,6 +56,7 @@ export class MapContainer extends Component {
       width: '100%',
       height: '100%'
     }
+    console.log(this.props)
     return (
       <Map
         google={this.props.google}
@@ -68,7 +71,9 @@ export class MapContainer extends Component {
           onClose={this.onClose}
         >
           <div>
-            <h4>{this.state.selectedPlace.name}</h4>
+            <WindowInfo props={this.props} />
+            {/*connected to line 47*/}
+            {/* <h4>{this.state.selectedPlace.name}</h4> */}
           </div>
         </InfoWindow>
       </Map>

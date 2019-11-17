@@ -1,11 +1,6 @@
 import React, {Component} from 'react'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
 
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-}
-
 export class MapContainer extends Component {
   constructor(props) {
     super(props)
@@ -34,6 +29,10 @@ export class MapContainer extends Component {
   }
 
   render() {
+    const mapStyles = {
+      width: '100%',
+      height: '100%'
+    }
     return (
       <Map
         google={this.props.google}
