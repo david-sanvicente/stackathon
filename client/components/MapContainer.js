@@ -45,7 +45,7 @@ export class MapContainer extends Component {
             lng: spot.fields.longitude
           }}
           onClick={this.onMarkerClick}
-          // name={`${spot.fields.artist}`}
+          name={`${spot.fields.artist}`}
         />
       )
     })
@@ -56,7 +56,7 @@ export class MapContainer extends Component {
       width: '100%',
       height: '100%'
     }
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <Map
         google={this.props.google}
@@ -71,9 +71,7 @@ export class MapContainer extends Component {
           onClose={this.onClose}
         >
           <div>
-            <WindowInfo props={this.props} />
-            {/*connected to line 47*/}
-            {/* <h4>{this.state.selectedPlace.name}</h4> */}
+            <WindowInfo props={this.state} />
           </div>
         </InfoWindow>
       </Map>
