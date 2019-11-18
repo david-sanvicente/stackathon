@@ -1,5 +1,6 @@
 import React from 'react'
 
+// stateless component for structuring InfoWindow
 const WindowInfo = props => {
   const {
     artist,
@@ -9,11 +10,13 @@ const WindowInfo = props => {
   } = props.props.activeMarker.spot.fields
   return (
     <div>
-      <h5>{`${name} by ${artist}`}</h5>
-      <a href={`${instagram}`} target="_blank">
-        {instagram}
-      </a>
-      <h5>{`Found at ${location_with_city}`}</h5>
+      <h4>{`${name} by ${artist}`}</h4>
+      <h4>
+        <a href={`${instagram}`} target="_blank">
+          {instagram}
+        </a>
+      </h4>
+      <h4>{`Found at ${location_with_city}`}</h4>
       <iframe src={instagram} />
     </div>
   )

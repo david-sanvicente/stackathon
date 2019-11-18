@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
+
+// This is the JSON used to create points on the map.
 import * as artData from '/Users/id/Desktop/stackathon/client/data/jersey-city-mural-map-list.json'
 import WindowInfo from './WindowInfo'
-// const key = process.env.REACT_APP_GOOGLE_KEY
+
+// Wrapping the data in an array to then map it
 const data = [artData]
 
 export class MapContainer extends Component {
@@ -16,6 +19,7 @@ export class MapContainer extends Component {
     }
   }
 
+  // Sets state to the selected Marker when clicked
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
@@ -23,15 +27,8 @@ export class MapContainer extends Component {
       showingInfoWindow: true
     })
 
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      })
-    }
-  }
-
+  /* Maps through the JSON to make markers 
+  from of all 138 object */
   displayMarkers = () => {
     const mapSpots = data[0].default
     return mapSpots.map((spot, index) => {
@@ -45,33 +42,40 @@ export class MapContainer extends Component {
             lng: spot.fields.longitude
           }}
           onClick={this.onMarkerClick}
-          name={`${spot.fields.artist}`}
         />
       )
     })
   }
 
   render() {
+    // Shapes the map. This is necessary as the map
+    // will not render without specified dimensions
     const mapStyles = {
       width: '100%',
       height: '100%'
     }
     return (
+      // <Map> is a built-in Google component
+      // renders map at the desired location and zoom
       <Map
         google={this.props.google}
         zoom={14}
         style={mapStyles}
         initialCenter={{lat: 40.726691, lng: -74.059252}}
       >
+        {/* plots markers from JSON onto map */}
         {this.displayMarkers()}
+
+        {/* Another built-in Google Component */}
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
         >
-          <div>
-            <WindowInfo props={this.state} />
-          </div>
+          {/* <WindowInfo /> Not a Google Component. 
+            Passes state (the clicked Marker)
+            to the componen which uses the props to 
+            structure the JSX */}
+          <WindowInfo props={this.state} />
         </InfoWindow>
       </Map>
     )
@@ -80,7 +84,6 @@ export class MapContainer extends Component {
 
 const googleWrapper = GoogleApiWrapper({
   apiKey: 'AIzaSyA4BBHjmNNTbfJWTLeDqBBGAJ0ITQxU_Ko'
-  // apiKey: key
 })(MapContainer)
 
 export default googleWrapper
