@@ -41,36 +41,38 @@ export class MapContainer extends Component {
     })
   }
 
+  // points the InfoWindow component to the (clicked )activeMarker
+  displayInfoWindow = () => {
+    return (
+      <InfoWindow
+        marker={this.state.activeMarker}
+        visible={this.state.showingInfoWindow}
+      >
+        {/* <WindowInfo /> Not a Google Component. 
+        Passes state (the clicked Marker)
+        to the componen which uses the props to 
+        structure the JSX */}
+        <WindowInfo props={this.state} />
+      </InfoWindow>
+    )
+  }
+
   render() {
-    // Shapes the map. This is necessary as the map
-    // will not render without specified dimensions
+    // Shapes the map. This is necessary as the map will not render without specified dimensions
     const mapStyles = {
       width: '100%',
       height: '100%'
     }
     return (
-      // <Map> is a built-in Google component
-      // renders map at the desired location and zoom
+      // <Map> is a built-in Google component renders map at the desired location and zoom
       <Map
         google={this.props.google}
         zoom={14}
         style={mapStyles}
         initialCenter={{lat: 40.726691, lng: -74.059252}}
       >
-        {/* plots markers from data onto map */}
         {this.displayMarkers()}
-
-        {/* Another built-in Google Component */}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
-          {/* <WindowInfo /> Not a Google Component. 
-            Passes state (the clicked Marker)
-            to the componen which uses the props to 
-            structure the JSX */}
-          <WindowInfo props={this.state} />
-        </InfoWindow>
+        {this.displayInfoWindow()}
       </Map>
     )
   }
