@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react'
+import WindowInfo from './WindowInfo'
 
 // This is the JSON used to create points on the map.
 import * as artData from '/Users/id/Desktop/stackathon/client/data/jersey-city-mural-map-list.json'
-import WindowInfo from './WindowInfo'
 
 // Wrapping the data in an array to then map it
 const data = [artData]
@@ -25,8 +25,7 @@ export class MapContainer extends Component {
       showingInfoWindow: true
     })
 
-  /* Maps through the JSON to make markers 
-  from of all 138 object */
+  // Maps through the data to make markers from of all 138 object
   displayMarkers = () => {
     const mapSpots = data[0].default
     return mapSpots.map((spot, index) => {
@@ -61,7 +60,7 @@ export class MapContainer extends Component {
         style={mapStyles}
         initialCenter={{lat: 40.726691, lng: -74.059252}}
       >
-        {/* plots markers from JSON onto map */}
+        {/* plots markers from data onto map */}
         {this.displayMarkers()}
 
         {/* Another built-in Google Component */}
