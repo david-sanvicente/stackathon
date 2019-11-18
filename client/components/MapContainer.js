@@ -5,9 +5,6 @@ import WindowInfo from './WindowInfo'
 // This is the JSON used to create points on the map.
 import * as artData from '/Users/id/Desktop/stackathon/client/data/jersey-city-mural-map-list.json'
 
-// Wrapping the data in an array to then map it
-const data = [artData]
-
 export class MapContainer extends Component {
   constructor(props) {
     super(props)
@@ -27,7 +24,7 @@ export class MapContainer extends Component {
 
   // Maps through the data to make markers from of all 138 object
   displayMarkers = () => {
-    const mapSpots = data[0].default
+    const mapSpots = [artData][0].default
     return mapSpots.map((spot, index) => {
       return (
         <Marker
